@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ProductList.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CreateSlice';
 
 const PlantList = () => {
   const baseImageURL = '/shoppingreact/images';
   const dispatch = useDispatch();
-  const [disabledProducts, setDisabledProducts] = useState([]);
-  const [plantsArray, setPlantsArray] = useState([
+  const cartItems = useSelector((state) => state.cart.items);
+  const disabledProductIds = cartItems.map((item) => item.id);
+  const plantsArray = [
     {
       id: 1,
       category: 'Aromatic Fragrant Plants',
@@ -21,37 +22,37 @@ const PlantList = () => {
         },
         {
           id: 12,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Jasmine',
+          imageUrl: `${baseImageURL}/jasmine.jpg`,
+          description: 'Jasmine description',
           cost: '10',
         },
         {
           id: 13,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Peace-Lilies',
+          imageUrl: `${baseImageURL}/peace-lilies.jpg`,
+          description: 'Peace-Lilies description',
           cost: '10',
         },
         {
           id: 14,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Rosemary',
+          imageUrl: `${baseImageURL}/rosemary.jpg`,
+          description: 'Rosemary description',
           cost: '10',
         },
         {
           id: 15,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Lemon Balm',
+          imageUrl: `${baseImageURL}/lemon-balm.jpg`,
+          description: 'Lemonbalm description',
           cost: '10',
         },
         {
           id: 16,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Marigold',
+          imageUrl: `${baseImageURL}/marigold.jpg`,
+          description: 'Marigold description',
           cost: '10',
         },
       ],
@@ -62,54 +63,52 @@ const PlantList = () => {
       plants: [
         {
           id: 21,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Aloe Vera',
+          imageUrl: `${baseImageURL}/aloe-vera.jpg`,
+          description: 'Aloe-vera description',
           cost: '10',
         },
         {
           id: 22,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Boston Fern',
+          imageUrl: `${baseImageURL}/boston-fern.jpg`,
+          description: 'Boston-fern description',
           cost: '10',
         },
         {
           id: 23,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Rubber Plant',
+          imageUrl: `${baseImageURL}/rubber-plant.jpg`,
+          description: 'Rubber-plant description',
           cost: '10',
         },
         {
           id: 24,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Snake Plant',
+          imageUrl: `${baseImageURL}/snake-plant.jpg`,
+          description: 'Snake-plant description',
           cost: '10',
         },
         {
           id: 25,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Spider Plant',
+          imageUrl: `${baseImageURL}/spider-plant.jpg`,
+          description: 'Spider-plant description',
           cost: '10',
         },
         {
           id: 26,
-          name: 'Lavender',
-          imageUrl: `${baseImageURL}/lavender.jpg`,
-          description: 'Lavenders description',
+          name: 'Mint',
+          imageUrl: `${baseImageURL}/mint.jpg`,
+          description: 'Mint description',
           cost: '10',
         },
       ],
     },
-  ]);
+  ];
 
   const handleAddToCart = (plant) => {
-    console.log('pressed');
     dispatch(addItem(plant));
-    setDisabledProducts([...disabledProducts, plant.id]);
   };
   return (
     <div className="product-grid">
@@ -133,12 +132,12 @@ const PlantList = () => {
                 <div className="product-description">{plant.description}</div>
                 <button
                   className={`product-button ${
-                    disabledProducts.includes(plant.id) ? 'disabled' : ''
+                    disabledProductIds.includes(plant.id) ? 'disabled' : ''
                   }`}
                   onClick={() => handleAddToCart(plant)}
-                  disabled={disabledProducts.includes(plant.id)}
+                  disabled={disabledProductIds.includes(plant.id)}
                 >
-                  {disabledProducts.includes(plant.id) ? 'Added' : 'Add'} to
+                  {disabledProductIds.includes(plant.id) ? 'Added' : 'Add'} to
                   Cart
                 </button>
               </div>

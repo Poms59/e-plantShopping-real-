@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PlantList from './PlantList';
+import CartItem from './CartItem';
+import { useDispatch, useSelector } from 'react-redux';
+
 function ProductList() {
-  const plantsArray = [];
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartCount = cartItems.length;
+
   const styleObj = {
     backgroundColor: '#4CAF50',
     color: '#fff!important',
@@ -66,6 +72,15 @@ function ProductList() {
                     strokeWidth="2"
                     id="mainIconPathAttribute"
                   ></path>
+                  <text
+                    x="120"
+                    y="160"
+                    textAnchor="middle"
+                    fontSize={100}
+                    fill="white"
+                  >
+                    {cartCount}
+                  </text>
                 </svg>
               </h1>
             </a>
@@ -73,6 +88,7 @@ function ProductList() {
         </div>
       </div>
       <PlantList />
+      <CartItem />
     </div>
   );
 }
