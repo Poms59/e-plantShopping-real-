@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem, updateQuantity } from './CreateSlice';
+import './ProductList.css';
 
 const CartItem = () => {
   const dispatch = useDispatch();
@@ -23,27 +24,46 @@ const CartItem = () => {
         <ul>
           {cartItems.map((plant) => (
             <li key={plant.id}>
-              <img src={plant.image} alt="" />
-              <div>
-                <p>{plant.name}</p>
-                <p>{plant.cost}</p>
-                <div className="quantity-control">
-                  <button onClick={() => handleUpdateQuantity(plant, -1)}>
-                    -
-                  </button>
-                  <p>{plant.quantity}</p>
-                  <button onClick={() => handleUpdateQuantity(plant, 1)}>
-                    +
+              <div className="cart-card">
+                <div className="cart-img-container">
+                  <img className="cart-img" src={plant.imageUrl} alt="" />
+                </div>
+                <div className="cart-detail-container">
+                  <h2>{plant.name}</h2>
+                  <p className="product-price">${plant.cost}</p>
+                  <div className="quantity-control">
+                    <button
+                      className="quantity-control-btn"
+                      onClick={() => handleUpdateQuantity(plant, -1)}
+                    >
+                      -
+                    </button>
+                    <p className="quantity-control-text">{plant.quantity}</p>
+                    <button
+                      className="quantity-control-btn"
+                      onClick={() => handleUpdateQuantity(plant, 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <h3>Total: ${plant.quantity * plant.cost}</h3>
+                  <button
+                    className="cart-remove-btn"
+                    onClick={() => handleRemoveItem(plant.id)}
+                  >
+                    Delete
                   </button>
                 </div>
-                <p>Total: ${plant.quantity * plant.cost}</p>
-                <button onClick={() => handleRemoveItem(plant.id)}>
-                  Delete
-                </button>
               </div>
             </li>
           ))}
         </ul>
+        <div className="cart-btn-container">
+          <button className="cart-btn">Continue Shopping</button>
+        </div>
+        <div className="cart-btn-container">
+          <button className="cart-btn">Checkout</button>
+        </div>
       </div>
     </>
   );

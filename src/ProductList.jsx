@@ -4,7 +4,6 @@ import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 
 function ProductList() {
-  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const cartCount = cartItems.length;
 
@@ -50,7 +49,6 @@ function ProductList() {
             </a>
           </div>
           <div>
-            {' '}
             <a href="#" style={styleA}>
               <h1 className="cart">
                 <svg

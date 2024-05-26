@@ -116,6 +116,48 @@ background-color: lightgrey;
   top: 0;
 }
 /* LandingPage.css */
+@media screen and (max-width: 1536px) {
+  
+  .about-us-container {
+    width: 100%;
+    /* margin: 0 auto; */
+    padding: 20px;
+    /* background-color: red; */
+    text-align: justify;
+  }
+
+  .about-us-container p{
+    font-size: 20px;
+  }
+  .landing_content {
+      margin-top: 430px;
+      margin-left: 200px;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      text-align: center;
+      /* background-color: red; */
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+  }
+
+  .landing_content h1 {
+    font-size: 32px;
+  }
+    .landing_content p {
+      font-size: 24px;
+    }
+  .aboutus_container {
+    flex-wrap: wrap;
+    margin-top: 20px;
+    /* Adjust as needed */
+    width: 100%;
+    /* Adjust as needed */
+  }
+}
+
 @media screen and (max-width: 768px) {
   .content {
     flex-direction: column;
@@ -133,6 +175,7 @@ background-color: lightgrey;
 
   .aboutus_container {
     margin-top: 20px; /* Adjust as needed */
+    margin-right: 0;
     width: 80%; /* Adjust as needed */
   }
 }
